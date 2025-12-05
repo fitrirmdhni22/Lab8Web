@@ -9,59 +9,157 @@
 
 Aplikasi web sederhana untuk mengelola data menggunakan PHP dan MySQL. Aplikasi ini memungkinkan pengguna untuk melihat, menambah, dan mengubah data yang tersimpan dalam database.
 
-## Fitur
+# Membuat Database
+```PHP
+CREATE DATABASE latihan1;
+```
 
-- Menampilkan daftar data
-- Menambahkan data baru
-- Mengubah data yang sudah ada
-- Antarmuka pengguna yang responsif
-- Koneksi database yang aman
+# Membuat Tabel
+```PHP
+CREATE TABLE data_barang (
+id_barang int(10) auto_increment Primary Key,
+kategori varchar(30),
+nama varchar(30),
+gambar varchar(100),
+harga_beli decimal(10,0),
+harga_jual decimal(10,0),
+stok int(4)
+);
+```
 
-## Persyaratan Sistem
+# Menambahkan Data
+```PHP
+INSERT INTO data_barang (kategori, nama, gambar, harga_beli, harga_jual, stok)
+VALUES ('Elektronik', 'HP Samsung Android', 'hp_samsung.jpg', 2000000, 2400000, 5),
+('Elektronik', 'HP Xiaomi Android', 'hp_xiaomi.jpg', 1000000, 1400000, 5),
+('Elektronik', 'HP OPPO Android', 'hp_oppo.jpg', 1800000, 2300000, 5);
+```
+# Membuat file koneksi database
+# Buat file baru dengan nama koneksi.php
+```PHP
+<?php
+$host = "localhost";
+$user = "root";
+$pass = "";
+$db = "latihan1";
 
-- XAMPP (PHP 7.4+)
-- MySQL 5.7+
-- Web browser modern
+$conn = mysqli_connect($host, $user, $pass, $db);
+if ($conn == false)
+{
+    echo "Koneksi ke server gagal.";
+    die();
+} else echo "Koneksi berhasil";
+?>
+```
 
-## Instalasi
+# Tampilan Output
+<img width="448" height="131" alt="image" src="https://github.com/user-attachments/assets/f371cbfc-dd14-4bfe-894a-cf50b21bb4a6" />
 
-1. Clone repositori ini ke dalam folder `htdocs` XAMPP:
-   ```
-   git clone [URL_REPOSITORY] lab8_php_database
-   ```
+# Membuat file index untuk menampilkan data (Read)
+# Buat file baru dengan nama index.php
+```PHP
+<?php
+include("koneksi.php");
 
-2. Buat database baru di phpMyAdmin 
-   
-3. Sesuaikan konfigurasi koneksi database di file `koneksi.php`
+// Query untuk menampilkan data
+$sql = 'SELECT * FROM data_barang';
+$result = mysqli_query($conn, $sql);
+?>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Barang</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Data Barang</h1>
+            <a href="tambah.php" class="btn-tambah">
+                <i class="fas fa-plus"></i> Tambah Barang
+            </a>
+        </header>
+        
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Gambar</th>
+                        <th>Nama Barang</th>
+                        <th>Kategori</th>
+                        <th>Harga Jual</th>
+                        <th>Harga Beli</th>
+                        <th>Stok</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php if($result && mysqli_num_rows($result) > 0): ?>
+                    <?php while($row = mysqli_fetch_array($result)): 
+                        // Tentukan kelas stok berdasarkan jumlah
+                        if ($row['stok'] >= 5) {
+                            $stok_class = "stok-tinggi";
+                        } elseif ($row['stok'] >= 2) {
+                            $stok_class = "stok-sedang";
+                        } else {
+                            $stok_class = "stok-rendah";
+                        }
+                    ?>
+                    <tr>
+                        <td>
+                            <img src="gambar/<?= $row['gambar']; ?>" alt="<?= $row['nama']; ?>" class="gambar-barang">
+                        </td>
+                        <td><?= $row['nama']; ?></td>
+                        <td><span class="kategori"><?= $row['kategori']; ?></span></td>
+                        <td class="harga harga-jual">Rp <?= number_format($row['harga_jual'], 0, ',', '.'); ?></td>
+                        <td class="harga harga-beli">Rp <?= number_format($row['harga_beli'], 0, ',', '.'); ?></td>
+                        <td><span class="stok <?= $stok_class; ?>"><?= $row['stok']; ?></span></td>
+                        <td>
+                            <div class="aksi-container">
+                                <a href="ubah.php?id=<?= $row['id_barang']; ?>" class="btn-ubah">
+                                    <i class="fas fa-edit"></i> Ubah
+                                </a>
+                                <a href="hapus.php?id=<?= $row['id_barang']; ?>" class="btn-hapus" onclick="return confirm('Apakah Anda yakin ingin menghapus barang ini?')">
+                                    <i class="fas fa-trash"></i> Hapus
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                    <?php endwhile; ?>
+                    <?php else: ?>
+                    <tr>
+                        <td colspan="7" class="no-data">Belum ada data</td>
+                    </tr>
+                    <?php endif; ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
 
-## Struktur File
+<?php
+// Tutup koneksi
+mysqli_close($conn);
+?>
+```
 
-- `index.php` - Halaman utama yang menampilkan daftar data
-- `tambah.php` - Halaman untuk menambahkan data baru
-- `ubah.php` - Halaman untuk mengubah data yang sudah ada
-- `koneksi.php` - File konfigurasi koneksi database
+# Tampilan Output
+<img width="1366" height="659" alt="image" src="https://github.com/user-attachments/assets/f5c58325-085d-4b3f-8c6b-2680d7ba54e3" />
 
-## Penggunaan
+# Menambah Data (Create)
+# Tampilan Output
+<img width="1329" height="678" alt="image" src="https://github.com/user-attachments/assets/ff72321e-0e59-421a-a64b-60bc4af80ec7" />
 
-1. Akses aplikasi melalui browser:
-   ```
-   http://localhost/lab8_php_database
-   ```
+# Mengubah Data (Update)
+# Tampilan Output
+<img width="1366" height="687" alt="image" src="https://github.com/user-attachments/assets/e890230f-654a-41cb-9920-02507ab1e698" />
 
-2. Untuk menambahkan data baru:
-   - Klik tombol "Tambah Data"
-   - Isi form yang tersedia
-   - Klik "Simpan"
+# Menghapus Data (Delete)
+# Tampilan Output
+<img width="1361" height="595" alt="image" src="https://github.com/user-attachments/assets/d7bc0e40-f470-4914-9320-cb3ae1029efd" />
 
-3. Untuk mengubah data:
-   - Klik tombol "Ubah" pada data yang ingin diubah
-   - Perbarui data yang diinginkan
-   - Klik "Simpan Perubahan"
-
-## Kontribusi
-
-1. Fork repositori ini
-2. Buat branch untuk fitur baru (`git checkout -b fitur-baru`)
-3. Commit perubahan Anda (`git commit -am 'Menambahkan fitur baru'`)
-4. Push ke branch (`git push origin fitur-baru`)
-5. Buat Pull Request
+### Terima Kasih
