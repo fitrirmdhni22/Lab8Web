@@ -5,7 +5,8 @@
 # Mata Kuliah : Pemrograman Web 1 (Tugas Pert-10)
 # Dosen Pengampu : Agung Nugroho, S.Kom., M.Kom.
 
-# Aplikasi web sederhana berbasis PHP & MySQL untuk manajemen data barang. Pengguna bisa melihat daftar barang, menambah data baru, memperbaharui data, dan menghapus barang dari basis data.
+# Aplikasi web sederhana berbasis PHP & MySQL untuk manajemen data barang. 
+# Pengguna bisa melihat daftar barang, menambah data baru, memperbaharui data, dan menghapus barang dari basis data.
 
 # Membuat Database
 ```PHP
@@ -160,37 +161,38 @@ mysqli_close($conn);
 # Tampilan Output
 <img width="1361" height="595" alt="image" src="https://github.com/user-attachments/assets/d7bc0e40-f470-4914-9320-cb3ae1029efd" />
 
-File ini digunakan untuk menghubungkan aplikasi PHP dengan database MySQL.
-Fungsionalitas & Alur Halaman
+# File ini digunakan untuk menghubungkan aplikasi PHP dengan database MySQL.
 
-Read (index.php)
-Menampilkan seluruh data di tabel data_barang dalam bentuk tabel HTML yang mencakup: Gambar, Nama Barang, Kategori, Harga Beli, Harga Jual, Stok, dan Aksi (Ubah / Hapus).
+# Fungsionalitas & Alur Halaman
 
-Create (tambah.php)
-Menyediakan form untuk menambahkan barang baru ke database.
+# 1. Read (index.php)
+# Menampilkan seluruh data di tabel data_barang dalam bentuk tabel HTML yang mencakup: Gambar, Nama Barang, Kategori, Harga Beli, Harga Jual, Stok, dan Aksi (Ubah / Hapus).
 
-Update (ubah.php)
-Membuka form yang sudah terisi data lama untuk memungkinkan perubahan data barang tertentu.
+# 2. Create (tambah.php)
+# Menyediakan form untuk menambahkan barang baru ke database.
 
-Delete (hapus.php)
-Menghapus data barang berdasarkan id_barang dengan konfirmasi dari pengguna.
+# 3. Update (ubah.php)
+# Membuka form yang sudah terisi data lama untuk memungkinkan perubahan data barang tertentu.
 
-🎨 Tampilan Antarmuka
+# 4. Delete (hapus.php)
+# Menghapus data barang berdasarkan id_barang dengan konfirmasi dari pengguna.
 
-File CSS dan ikon (Font Awesome) digunakan untuk mempercantik tampilan.
+# 🎨 Tampilan Antarmuka
 
-Harga diformat dalam mata uang Rupiah, stok diberi kelas untuk membedakan level stok (tinggi, sedang, rendah).
+# - File CSS dan ikon (Font Awesome) digunakan untuk mempercantik tampilan.
 
-Jika tidak ada data, tabel menampilkan baris “Belum ada data”.
+# - Harga diformat dalam mata uang Rupiah, stok diberi kelas untuk membedakan level stok (tinggi, sedang, rendah).
 
-✅ Cara Menjalankan
+# Jika tidak ada data, tabel menampilkan baris “Belum ada data”.
 
-Pastikan server web (misalnya Apache) dan MySQL aktif.
+# ✅ Cara Menjalankan
 
-Import database & struktur tabel seperti dijelaskan di atas.
+# 1. Pastikan server web (misalnya Apache) dan MySQL aktif.
 
-Tempatkan semua file PHP & folder gambar sesuai struktur repo.
+# 2. Import database & struktur tabel seperti dijelaskan di atas.
 
-Akses index.php di browser untuk mulai menggunakan aplikasi.
+# 3. Tempatkan semua file PHP & folder gambar sesuai struktur repo.
+
+# 4. Akses index.php di browser untuk mulai menggunakan aplikasi.
 
 # Terima Kasih
