@@ -5,9 +5,7 @@
 # Mata Kuliah : Pemrograman Web 1 (Tugas Pert-10)
 # Dosen Pengampu : Agung Nugroho, S.Kom., M.Kom.
 
-# Aplikasi Manajemen Data dengan PHP dan MySQL
-
-Aplikasi web sederhana untuk mengelola data menggunakan PHP dan MySQL. Aplikasi ini memungkinkan pengguna untuk melihat, menambah, dan mengubah data yang tersimpan dalam database.
+# Aplikasi web sederhana berbasis PHP & MySQL untuk manajemen data barang. Pengguna bisa melihat daftar barang, menambah data baru, memperbaharui data, dan menghapus barang dari basis data.
 
 # Membuat Database
 ```PHP
@@ -162,4 +160,37 @@ mysqli_close($conn);
 # Tampilan Output
 <img width="1361" height="595" alt="image" src="https://github.com/user-attachments/assets/d7bc0e40-f470-4914-9320-cb3ae1029efd" />
 
-### Terima Kasih
+File ini digunakan untuk menghubungkan aplikasi PHP dengan database MySQL.
+Fungsionalitas & Alur Halaman
+
+Read (index.php)
+Menampilkan seluruh data di tabel data_barang dalam bentuk tabel HTML yang mencakup: Gambar, Nama Barang, Kategori, Harga Beli, Harga Jual, Stok, dan Aksi (Ubah / Hapus).
+
+Create (tambah.php)
+Menyediakan form untuk menambahkan barang baru ke database.
+
+Update (ubah.php)
+Membuka form yang sudah terisi data lama untuk memungkinkan perubahan data barang tertentu.
+
+Delete (hapus.php)
+Menghapus data barang berdasarkan id_barang dengan konfirmasi dari pengguna.
+
+🎨 Tampilan Antarmuka
+
+File CSS dan ikon (Font Awesome) digunakan untuk mempercantik tampilan.
+
+Harga diformat dalam mata uang Rupiah, stok diberi kelas untuk membedakan level stok (tinggi, sedang, rendah).
+
+Jika tidak ada data, tabel menampilkan baris “Belum ada data”.
+
+✅ Cara Menjalankan
+
+Pastikan server web (misalnya Apache) dan MySQL aktif.
+
+Import database & struktur tabel seperti dijelaskan di atas.
+
+Tempatkan semua file PHP & folder gambar sesuai struktur repo.
+
+Akses index.php di browser untuk mulai menggunakan aplikasi.
+
+# Terima Kasih
